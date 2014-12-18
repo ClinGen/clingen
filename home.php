@@ -48,7 +48,7 @@ include("./inc/head.php"); ?>
 	$t->showAtTags = true; // show @user tags in the tweets?
 	$t->showDate = 'after'; // show date/time: 'before', 'after', or blank to disable.
 	$t->showReplies = false; // show Twitter @replies in timeline?
-	$t->showRetweets = false; // show Twitter retweets in timeline? 
+	$t->showRetweets = true; // show Twitter retweets in timeline? 
 	// generated markup options:
 	$t->listOpen = "<div class='row MarkupTwitterFeed'>";
 	$t->listClose = "</div>";
