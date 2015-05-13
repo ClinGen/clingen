@@ -18,16 +18,20 @@ include("./inc/head.php");
       <li role="presentation" class="active"><a href="#All" aria-controls="All" role="tab" data-toggle="tab">All Resources</a></li>
 
   <?
-  $tabs = $pages->get("2128")->children('sort=sort');
+  $tabs = $pages->get("2686")->children('sort=sort');
     foreach($tabs as $tab) {
       echo "<li role='presentation'><a href='#{$tab->name}' aria-controls='{$tab->name}' role='tab' data-toggle='tab'>$tab->title</a></li>";
     }
     ?>
+    
+    <? /*
 <li role="presentation" class="pull-right">
       <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
         Contact Us
   </button>
 </li>
+
+*/ ?>
   </ul>
     <div class="row ">
      <div class="tab-content">
@@ -203,7 +207,7 @@ foreach($tabs as $tab) {
 </div>
 	
 
-
+<? /* 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -252,6 +256,8 @@ foreach($tabs as $tab) {
     </div>
   </div>
 </div>
+
+*/ ?>
 <? include("./inc/foot.php"); 
 
 
