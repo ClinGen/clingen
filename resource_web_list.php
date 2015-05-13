@@ -18,7 +18,7 @@ include("./inc/head.php");
       <li role="presentation" class="active"><a href="#All" aria-controls="All" role="tab" data-toggle="tab">All Resources</a></li>
 
   <?
-  $tabs = $pages->get("2128")->children('sort=sort');
+  $tabs = $pages->get("2686")->children('sort=sort');
     foreach($tabs as $tab) {
       echo "<li role='presentation'><a href='#{$tab->name}' aria-controls='{$tab->name}' role='tab' data-toggle='tab'>$tab->title</a></li>";
     }
