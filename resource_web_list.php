@@ -10,17 +10,21 @@ include("./inc/head.php");
     <span class='bodytext'><?=$page->body; ?> </span>
    
     
-    
     <div role="tabpanel padding-top-lg">
     
-    <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#All" aria-controls="All" role="tab" data-toggle="tab">All Resources</a></li>
-
+      
   <?
   $tabs = $pages->get("2686")->children('sort=sort');
+  $segmentTab = $input->urlSegment2;
+  $activeTab = ($segmentTab == "" ? 'All' : $segmentTab);
+  
+  ?>
+  <li role="presentation" class="<? echo ($activeTab == "All" ? 'active' : '') ?>"><a href="#All" aria-controls="All" role="tab" data-toggle="tab" onClick="ga('send', 'event', 'web-resources', 'tab', 'All', {'page': '<?=$page->path?><?=$input->urlSegment1?>', 'nonInteraction': 1});">All Resources</a></li>
+  <?
     foreach($tabs as $tab) {
-      echo "<li role='presentation'><a href='#{$tab->name}' aria-controls='{$tab->name}' role='tab' data-toggle='tab'>$tab->title</a></li>";
+      $isActive = ($activeTab == $tab->name ? 'active' : '');
+      echo "<li role='presentation' class='$isActive'><a href='#{$tab->name}' aria-controls='{$tab->name}' role='tab' data-toggle='tab'  onClick=\"ga('send', 'event', 'web-resources', 'tab', '{$tab->title}', {'page': '{$page->path}{$input->urlSegment1}', 'nonInteraction': 1});\" >$tab->title</a></li>";
     }
     ?>
     
@@ -37,7 +41,7 @@ include("./inc/head.php");
      <div class="tab-content">
      
      
-     <div role="tabpanel" class="tab-pane active padding-top-lg" id="All">
+     <div role="tabpanel" class="tab-pane <?=($activeTab == "All" ? 'active' : '') ?> padding-top-lg" id="All">
   <?php
   
         echo "<div class='col-sm-12'>";
@@ -60,11 +64,11 @@ include("./inc/head.php");
        //$type_info = substr($type_info, 0, -3);
 				echo "<div class='col-sm-6 {$temprow} padding-bottom-lg'>
               <div class='col-sm-2 col-xs-1 padding-none'>
-                 <a class='padding-top-none' href='{$match->url_website}' onClick=\"ga('send', 'event', 'web-resources', 'click', '{$match->title}', {'page': '{$page->path}{$input->urlSegment1}', 'nonInteraction': 1});\"  target='_blank' title='{$match->title}'>{$tempimg}</a>
+                 <a class='padding-top-none' href='{$match->url_website}' onClick=\"ga('send', 'event', 'web-resources', 'link', '{$match->title}', {'page': '{$page->path}{$input->urlSegment1}', 'nonInteraction': 1});\"  target='_blank' title='{$match->title}'>{$tempimg}</a>
               </div>
               <div class='col-sm-9 col-xs-10  margin-left-lg padding-bottom-lg'>
                 <strong>
-                 <a class='text-black' href='{$match->url_website}' onClick=\"ga('send', 'event', 'web-resources', 'click', '{$match->title}', {'page': '{$page->path}{$input->urlSegment1}', 'nonInteraction': 1});\"  target='_blank' title='{$match->title}'>
+                 <a class='text-black' href='{$match->url_website}' onClick=\"ga('send', 'event', 'web-resources', 'link', '{$match->title}', {'page': '{$page->path}{$input->urlSegment1}', 'nonInteraction': 1});\"  target='_blank' title='{$match->title}'>
                     {$match->title} <span class=' glyphicon text-sm text-muted glyphicon-new-window'></span>
                  </a></strong> $register_info
                     <div class='text-sm text-muted margin-top-sm'>{$match->summary}</div>
@@ -89,7 +93,7 @@ include("./inc/head.php");
   
 foreach($tabs as $tab) { 
  
-  
+  $isActive = ($activeTab == $tab->name ? 'active' : '');
    $tabpanelid = $tab->id;
   // Grabs the children for the page
   $children = $pages->get($tabpanelid)->children;
@@ -98,7 +102,7 @@ foreach($tabs as $tab) {
   $nochildrencss = " padding-top-lg";
   }
   
-  echo "<div role='tabpanel' class='tab-pane $nochildrencss' id='$tab->name'>";
+  echo "<div role='tabpanel' class='tab-pane $isActive $nochildrencss' id='$tab->name'>";
   //Checks to see if this page has children
     if(count($children)) {
 		  foreach($children as $child) { 
@@ -124,11 +128,11 @@ foreach($tabs as $tab) {
        //$type_info = substr($type_info, 0, -3);
         echo "<div class='col-sm-6 {$temprow} padding-bottom-lg'>
               <div class='col-sm-2 col-xs-1 padding-none'>
-                 <a class='padding-top-none' href='{$match->url_website}' onClick=\"ga('send', 'event', 'web-resources', 'click', '{$match->title}', {'page': '{$page->path}{$input->urlSegment1}', 'nonInteraction': 1});\"  target='_blank' title='{$match->title}'>{$tempimg}</a>
+                 <a class='padding-top-none' href='{$match->url_website}' onClick=\"ga('send', 'event', 'web-resources', 'link', '{$match->title}', {'page': '{$page->path}{$input->urlSegment1}', 'nonInteraction': 1});\"  target='_blank' title='{$match->title}'>{$tempimg}</a>
               </div>
               <div class='col-sm-9 col-xs-10  margin-left-lg padding-bottom-lg'>
                 <strong>
-                 <a class='text-black' href='{$match->url_website}' onClick=\"ga('send', 'event', 'web-resources', 'click', '{$match->title}', {'page': '{$page->path}{$input->urlSegment1}', 'nonInteraction': 1});\"  target='_blank' title='{$match->title}'>
+                 <a class='text-black' href='{$match->url_website}' onClick=\"ga('send', 'event', 'web-resources', 'link', '{$match->title}', {'page': '{$page->path}{$input->urlSegment1}', 'nonInteraction': 1});\"  target='_blank' title='{$match->title}'>
                     {$match->title} <span class=' glyphicon text-sm text-muted glyphicon-new-window'></span>
                  </a></strong>
                     <div class='text-sm text-muted margin-top-sm'>{$match->summary}</div>
@@ -172,11 +176,11 @@ foreach($tabs as $tab) {
        //$type_info = substr($type_info, 0, -3);
         echo "<div class='col-sm-6 {$temprow} padding-bottom-lg'>
               <div class='col-sm-2 col-xs-1 padding-none'>
-                 <a class='padding-top-none' href='{$match->url_website}' onClick=\"ga('send', 'event', 'web-resources', 'click', '{$match->title}', {'page': '{$page->path}{$input->urlSegment1}', 'nonInteraction': 1});\"  target='_blank' title='{$match->title}'>{$tempimg}</a>
+                 <a class='padding-top-none' href='{$match->url_website}' onClick=\"ga('send', 'event', 'web-resources', 'link', '{$match->title}', {'page': '{$page->path}{$input->urlSegment1}', 'nonInteraction': 1});\"  target='_blank' title='{$match->title}'>{$tempimg}</a>
               </div>
               <div class='col-sm-9 col-xs-10  margin-left-lg padding-bottom-lg'>
                 <strong>
-                 <a class='text-black' href='{$match->url_website}' onClick=\"ga('send', 'event', 'web-resources', 'click', '{$match->title}', {'page': '{$page->path}{$input->urlSegment1}', 'nonInteraction': 1});\"  target='_blank' title='{$match->title}'>
+                 <a class='text-black' href='{$match->url_website}' onClick=\"ga('send', 'event', 'web-resources', 'link', '{$match->title}', {'page': '{$page->path}{$input->urlSegment1}', 'nonInteraction': 1});\"  target='_blank' title='{$match->title}'>
                     {$match->title} <span class=' glyphicon text-sm text-muted glyphicon-new-window'></span>
                  </a></strong>
                     <div class='text-sm text-muted margin-top-sm'>{$match->summary}</div>
