@@ -1,3 +1,13 @@
+
+
+/* allow hover to change block on drop down nav.
+-------------------------------------------------- */
+.btn-group-hover:hover>.dropdown-menu {
+  display: block;
+}
+
+
+
 /* GLOBAL STYLES
 -------------------------------------------------- */
 
