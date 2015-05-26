@@ -54,7 +54,17 @@
   <div class="pull-right padding-bottom-sm"> 
 			<div class="pull-right padding-left-md"> <a  href="<? echo $pages->get(1114)->url; ?>" title="<?=$pages->get(1114)->title?>" class="text-blue"><?=$pages->get(1114)->title?></a> </div>
 			<div class="pull-right padding-left-md"> <a  href="<? echo $pages->get(1000)->url; ?>" title="<? echo $sitename_long ?> <?=$pages->get(1000)->title?>" class="text-blue"><?=$pages->get(1000)->title?></a> </div>
-			
+			<div class="pull-right padding-left-md btn-group btn-group-hover">
+				<a aria-expanded="false" href="<? echo $pages->get(2743)->url; ?>" title="<? echo $sitename_long ?> <?=$pages->get(2743)->title?>" class="text-blue" data-hover='dropdown' ><?=$pages->get(2743)->title?></a> 
+				<ul class="dropdown-menu hidden-sm hidden-xs" style="z-index:1001">
+				   <?
+				   $children = $pages->get(1119)->children;
+				   foreach($children as $child) {
+				     echo "<li class=''><a href='{$child->url}' title='{$child->title}'>{$child->title}</a></li>";
+				   }
+				   ?>
+				  </ul>
+			</div>
 		<!-- 
 		<form class="col-sm-3 pull-right" role="form" action='<?php echo $config->urls->root?>references-and-policies/search/' method='get'>
 			<div class="input-group ">
@@ -108,6 +118,9 @@
 						echo "</li>";
 					}
 			?>
+			<li class="<?=$tempkey ?> visible-xs">
+		      		<a href="<? echo $pages->get(2743)->url; ?>" title="<? echo $sitename_long ?> <?=$pages->get(2743)->title?>" class="text-blue" ><?=$pages->get(2743)->title?></a>
+		      	</li>
 			</ul>
 		</div></div></div>
 	</div> 
